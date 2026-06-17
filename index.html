@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elshakaya IT Business Solutions Inc.</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230E3A66'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-family='serif' font-size='20' fill='%232BA6DC'>E</text></svg>" />
+  <meta name="description" content="Purpose-built technology, domain expertise, and top-tier talent — turning challenges into measurable transformation for business and government." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    /* ─── Tokens ─── */
+    :root {
+      --bg:       #F4F7FA;
+      --bg-alt:   #E8EEF4;
+      --ink:      #161D26;
+      --ink-mid:  #2C353F;
+      --ink-mute: #4A535E;
+      --ink-soft: #5A6470;
+      --navy:     #0E3A66;
+      --navy-dk:  #0A2C4F;
+      --mark:     #14538F;
+      --accent:   #2BA6DC;
+      --mist:     #AEC2D6;
+      --surface:  #DCE4EC;
+      --ff-serif: 'Newsreader', serif;
+      --ff-sans:  'Archivo', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--ff-sans);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--navy); color: var(--bg); }
+
+    /* ─── Reveal animation ─── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1);
+    }
+    [data-reveal].in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── Marquee ─── */
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: marquee 60s linear infinite;
+      will-change: transform;
+    }
+
+    /* ─── Nav ─── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(244,247,250,.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(22,29,38,.1);
+    }
+    nav {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav-logo img { height: 42px; width: auto; display: block; }
+    .nav-logo span {
+      font-weight: 700;
+      letter-spacing: -.01em;
+      font-size: 19px;
+      color: var(--mark);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-mid);
+      font-size: 14.5px;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--mark); }
+    .nav-cta {
+      text-decoration: none;
+      color: var(--bg) !important;
+      background: var(--navy) !important;
+      font-size: 14.5px;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: 999px;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--mark) !important; }
+
+    /* ─── Sections ─── */
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+
+    /* ─── Hero ─── */
+    #top { padding-top: 92px; }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+    .eyebrow-label {
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .eyebrow-line { flex: 1; height: 1px; background: rgba(22,29,38,.16); }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 56px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .hero-grid h1 {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: clamp(40px,4.6vw,70px);
+      line-height: 1.04;
+      letter-spacing: -.02em;
+      max-width: 14ch;
+    }
+    .hero-grid h1 em { font-style: italic; color: var(--mark); }
+    .hero-grid p {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink-mute);
+      max-width: 46ch;
+      margin-top: 28px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      margin-top: 34px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--accent);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 999px;
+      transition: background .2s, transform .18s;
+    }
+    .btn-primary:hover { background: var(--mark); transform: translateY(-1px); }
+    .btn-outline {
+      text-decoration: none;
+      color: var(--navy);
+      background: transparent;
+      border: 1.5px solid rgba(14,58,102,.3);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 999px;
+      transition: border-color .2s, transform .18s;
+    }
+    .btn-outline:hover { border-color: var(--navy); transform: translateY(-1px); }
+
+    .hero-img-wrap { position: relative; }
+    .hero-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+    }
+    .hero-stat {
+      position: absolute;
+      left: -20px;
+      bottom: 28px;
+      background: var(--navy);
+      color: var(--bg);
+      border-radius: 14px;
+      padding: 18px 24px;
+      box-shadow: 0 18px 40px rgba(14,58,102,.28);
+    }
+    .hero-stat-num {
+      font-family: var(--ff-serif);
+      font-size: 34px;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--mist);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* ─── Facts bar ─── */
+    .facts-bar {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      margin-top: 64px;
+      border-top: 1px solid rgba(22,29,38,.16);
+      border-bottom: 1px solid rgba(22,29,38,.16);
+    }
+    .fact-cell {
+      padding: 30px 28px 30px 0;
+      border-right: 1px solid rgba(22,29,38,.1);
+    }
+    .fact-cell:last-child { border-right: none; }
+    .fact-value {
+      font-family: var(--ff-serif);
+      font-weight: 500;
+      font-size: clamp(18px,2vw,28px);
+      line-height: 1.1;
+      color: var(--mark);
+    }
+    .fact-label {
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    /* ─── Marquee strip ─── */
+    .marquee-strip {
+      background: var(--navy);
+      overflow: hidden;
+      margin-top: 72px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+    }
+    .marquee-track { padding: 22px 0; }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+    }
+    .marquee-word {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: 23px;
+      letter-spacing: .01em;
+      color: #EAF1F8;
+      white-space: nowrap;
+      padding: 0 34px;
+    }
+    .marquee-dot {
+      color: var(--accent);
+      font-size: 13px;
+      opacity: .85;
+    }
+
+    /* ─── Positioning ─── */
+    .pos-section { padding: 96px 0; }
+    .pos-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 48px;
+    }
+    .pos-card { border-top: 2px solid var(--accent); padding-top: 22px; }
+    .pos-card h3 {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: 26px;
+      line-height: 1.18;
+      letter-spacing: -.01em;
+    }
+    .pos-card p {
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: var(--ink-mute);
+      margin-top: 14px;
+    }
+
+    /* ─── Services ─── */
+    .services-section { background: var(--bg-alt); }
+    .services-inner { padding: 96px 0 100px; }
+    .services-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .section-eyebrow {
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--mark);
+      font-weight: 600;
+    }
+    .services-header h2 {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: clamp(34px,4.6vw,58px);
+      line-height: 1.04;
+      letter-spacing: -.02em;
+      margin-top: 14px;
+    }
+    .services-header p {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 38ch;
+    }
+    .services-list { border-top: 1px solid rgba(22,29,38,.2); margin-top: 40px; }
+    .service-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1.1fr;
+      gap: 32px;
+      align-items: baseline;
+      padding: 28px 8px;
+      border-bottom: 1px solid rgba(22,29,38,.13);
+      transition: background .2s;
+      cursor: default;
+    }
+    .service-row:hover { background: rgba(255,255,255,.5); }
+    .service-num {
+      font-family: var(--ff-serif);
+      font-size: 20px;
+      color: var(--mark);
+    }
+    .service-title {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: clamp(21px,2.3vw,29px);
+      line-height: 1.12;
+      letter-spacing: -.01em;
+    }
+    .service-desc { font-size: 15.5px; line-height: 1.6; color: var(--ink-mute); }
+
+    /* ─── How we work ─── */
+    .process-section { background: var(--navy); color: var(--bg); }
+    .process-inner { padding: 96px 0 100px; }
+    .process-header { max-width: 680px; }
+    .process-eyebrow {
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .process-header h2 {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: clamp(34px,4.4vw,54px);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      margin-top: 14px;
+    }
+    .process-header p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--mist);
+      margin-top: 20px;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5,1fr);
+      gap: 1px;
+      margin-top: 56px;
+      background: rgba(255,255,255,.16);
+    }
+    .process-step {
+      background: var(--navy);
+      padding: 30px 24px 30px 0;
+      transition: background .2s;
+    }
+    .process-step:hover { background: rgba(255,255,255,.04); }
+    .step-num {
+      font-family: var(--ff-serif);
+      font-size: 22px;
+      color: var(--accent);
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      margin: 16px 0 12px;
+    }
+    .step-body { font-size: 14.5px; line-height: 1.55; color: var(--mist); }
+
+    /* ─── Sectors ─── */
+    .sectors-section { padding: 100px 0; }
+    .sectors-header { max-width: 640px; margin-bottom: 48px; }
+    .sectors-header h2 {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: clamp(34px,4.4vw,54px);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      margin-top: 14px;
+    }
+    .sectors-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(22,29,38,.14);
+      border: 1px solid rgba(22,29,38,.14);
+    }
+    .sector-card { background: var(--bg); }
+    .sector-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .sector-body { padding: 36px 40px 44px; }
+    .sector-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sector-num {
+      font-family: var(--ff-serif);
+      font-size: 24px;
+      color: var(--accent);
+    }
+    .sector-tag {
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    .sector-card h3 {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: 30px;
+      letter-spacing: -.01em;
+      margin-top: 18px;
+    }
+    .sector-card p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink-mid);
+      margin-top: 12px;
+      max-width: 42ch;
+    }
+
+    /* ─── About ─── */
+    .about-section { background: var(--bg-alt); }
+    .about-inner { padding: 100px 0; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .about-imgs { position: relative; }
+    .about-main {
+      width: 84%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+      border-radius: 18px;
+    }
+    .about-sub {
+      position: absolute;
+      right: 0;
+      bottom: -32px;
+      width: 48%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      border: 6px solid var(--bg-alt);
+      border-radius: 14px;
+    }
+    .about-text .section-eyebrow { display: block; }
+    .about-text h2 {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: clamp(34px,4.4vw,52px);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      margin-top: 18px;
+    }
+    .about-text p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink-mid);
+      margin-top: 24px;
+    }
+    .about-text p + p { color: var(--ink-soft); margin-top: 20px; }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      margin-top: 72px;
+      border-top: 1px solid rgba(22,29,38,.18);
+    }
+    .pillar {
+      padding: 36px 36px 8px 0;
+      border-right: 1px solid rgba(22,29,38,.12);
+    }
+    .pillar:last-child { border-right: none; }
+    .pillar h3 {
+      font-size: 13px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--mark);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .pillar p { font-size: 16px; line-height: 1.6; color: var(--ink-mid); }
+
+    /* ─── Contact ─── */
+    .contact-section { background: var(--navy); color: var(--bg); }
+    .contact-inner {
+      padding: 100px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-eyebrow {
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .contact-left h2 {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: clamp(34px,4.4vw,56px);
+      line-height: 1.06;
+      letter-spacing: -.02em;
+      margin-top: 18px;
+    }
+    .contact-left > p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--mist);
+      margin-top: 22px;
+      max-width: 42ch;
+    }
+    .contact-details {
+      margin-top: 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-row { display: flex; gap: 16px; align-items: baseline; }
+    .contact-key {
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #7C95AD;
+      font-weight: 600;
+      width: 110px;
+      flex-shrink: 0;
+    }
+    .contact-val {
+      color: var(--bg);
+      text-decoration: none;
+      font-size: 18px;
+      transition: color .2s;
+      word-break: break-all;
+    }
+    .contact-val:hover { color: var(--accent); }
+    .contact-val-static { font-size: 18px; color: var(--surface); }
+
+    /* ─── Contact form ─── */
+    .form-card {
+      background: var(--bg);
+      color: var(--ink);
+      border-radius: 14px;
+      padding: 40px;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .form-field { display: flex; flex-direction: column; gap: 7px; }
+    .form-label {
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    .form-input {
+      border: none;
+      border-bottom: 1.5px solid rgba(22,29,38,.22);
+      background: transparent;
+      padding: 8px 2px;
+      font-size: 15px;
+      font-family: var(--ff-sans);
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .form-input:focus { border-bottom-color: var(--navy); }
+    .form-input::placeholder { color: #9AA0A8; }
+    .form-submit {
+      margin-top: 32px;
+      width: 100%;
+      background: var(--navy);
+      color: var(--bg);
+      border: none;
+      padding: 16px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--ff-sans);
+      cursor: pointer;
+      transition: background .2s, transform .18s;
+    }
+    .form-submit:hover { background: var(--accent); transform: translateY(-1px); }
+    .form-thank {
+      min-height: 420px;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .form-thank.show { display: flex; }
+    .thank-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+    .form-thank h3 {
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      font-size: 32px;
+      margin-top: 24px;
+    }
+    .form-thank p { font-size: 16px; line-height: 1.6; color: var(--ink-mute); margin-top: 12px; }
+
+    /* ─── Footer ─── */
+    footer { background: var(--navy-dk); color: var(--mist); }
+    .footer-top {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 52px 40px 36px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+    }
+    .footer-logo-icon {
+      background: #fff;
+      border-radius: 9px;
+      padding: 6px 9px;
+      display: flex;
+      align-items: center;
+    }
+    .footer-logo-icon img { height: 30px; width: auto; display: block; }
+    .footer-logo-text { font-weight: 700; font-size: 17px; color: var(--bg); }
+    .footer-links { display: flex; gap: 30px; flex-wrap: wrap; }
+    .footer-links a {
+      text-decoration: none;
+      color: var(--mist);
+      font-size: 14px;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--bg); }
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 22px 40px 44px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .footer-copy { font-size: 13px; color: #6E869E; }
+  </style>
+</head>
+<body>
+
+  <!-- ───────────────── NAV ───────────────── -->
+  <header>
+    <nav>
+      <a href="#top" class="nav-logo">
+        <img src="logo-mark.png" alt="Elshakaya" />
+        <span>Elshakaya</span>
+      </a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">How we work</a>
+        <a href="#sectors">Sectors</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ───────────────── HERO ───────────────── -->
+  <section id="top">
+    <div class="wrap">
+      <div class="hero-eyebrow" data-reveal>
+        <span class="eyebrow-label" style="color:var(--mark)">Brooklyn, New York</span>
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-label" style="color:var(--ink-soft)">IT Business Solutions Inc.</span>
+      </div>
+
+      <div class="hero-grid" data-reveal>
+        <div>
+          <h1>Turning business challenges into <em>scalable</em> solutions.</h1>
+          <p>Purpose-built technology, domain expertise, and top-tier talent — turning challenges into measurable transformation for business and, soon, government.</p>
+          <div class="hero-btns">
+            <a href="#services" class="btn-primary">Explore services</a>
+            <a href="#contact" class="btn-outline">Partner with us</a>
+          </div>
+        </div>
+
+        <div class="hero-img-wrap">
+          <img
+            class="hero-img"
+            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1100&q=80&auto=format&fit=crop"
+            alt="Business handshake"
+            loading="eager"
+          />
+          <div class="hero-stat">
+            <div class="hero-stat-num">100+</div>
+            <div class="hero-stat-label">Projects delivered</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facts bar -->
+      <div class="facts-bar" data-reveal>
+        <div class="fact-cell">
+          <div class="fact-value">Business &amp; Government</div>
+          <div class="fact-label">Sectors served</div>
+        </div>
+        <div class="fact-cell">
+          <div class="fact-value">10 practice areas</div>
+          <div class="fact-label">Capabilities</div>
+        </div>
+        <div class="fact-cell">
+          <div class="fact-value">Strategy → Operations</div>
+          <div class="fact-label">End-to-end delivery</div>
+        </div>
+        <div class="fact-cell">
+          <div class="fact-value">Brooklyn, NY</div>
+          <div class="fact-label">Headquarters</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── MARQUEE ───────────────── -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <!-- Two full sets so the loop is seamless -->
+      <div class="marquee-item"><span class="marquee-word">Strategy</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Cloud</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Cybersecurity</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Data</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">AI / ML</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Operations</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Transformation</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Consulting</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Software</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Security</span><span class="marquee-dot">✦</span></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="marquee-item"><span class="marquee-word">Strategy</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Cloud</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Cybersecurity</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Data</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">AI / ML</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Operations</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Transformation</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Consulting</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Software</span><span class="marquee-dot">✦</span></div>
+      <div class="marquee-item"><span class="marquee-word">Security</span><span class="marquee-dot">✦</span></div>
+    </div>
+  </div>
+
+  <!-- ───────────────── POSITIONING ───────────────── -->
+  <section>
+    <div class="wrap pos-section">
+      <div class="pos-grid" data-reveal>
+        <div class="pos-card">
+          <h3>Scalable by design</h3>
+          <p>Purpose-built technology and domain expertise that helps organizations stay agile as they grow.</p>
+        </div>
+        <div class="pos-card">
+          <h3>Secure &amp; competitive</h3>
+          <p>Solutions engineered to keep you resilient, compliant, and ahead in a rapidly evolving landscape.</p>
+        </div>
+        <div class="pos-card">
+          <h3>Refreshingly straightforward</h3>
+          <p>Smart, secure, budget-conscious delivery that gets results — without the complexity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── SERVICES ───────────────── -->
+  <section id="services" class="services-section">
+    <div class="wrap services-inner">
+      <div class="services-header" data-reveal>
+        <div>
+          <span class="section-eyebrow">Capabilities</span>
+          <h2>Ten practice areas, one partner.</h2>
+        </div>
+        <p>End-to-end capability across strategy, build, security, and operations — so you don't have to stitch together vendors.</p>
+      </div>
+
+      <div class="services-list" data-reveal>
+        <div class="service-row">
+          <span class="service-num">01</span>
+          <h3 class="service-title">IT Consulting</h3>
+          <p class="service-desc">Strategic technology planning, enterprise architecture, and implementation roadmaps to accelerate transformation.</p>
+        </div>
+        <div class="service-row">
+          <span class="service-num">02</span>
+          <h3 class="service-title">Custom Software Development</h3>
+          <p class="service-desc">Bespoke applications designed for the unique operational and compliance needs of businesses and agencies.</p>
+        </div>
+        <div class="service-row">
+          <span class="service-num">03</span>
+          <h3 class="service-title">Digital Transformation</h3>
+          <p class="service-desc">Modernizing legacy systems, digitizing workflows, and enabling cloud-first operations.</p>
+        </div>
+        <div class="service-row">
+          <span class="service-num">04</span>
+          <h3 class="service-title">Cybersecurity Services</h3>
+          <p class="service-desc">End-to-end security strategies to protect data, systems, and digital infrastructure.</p>
+        </div>
+        <div class="service-row">
+          <span class="service-num">05</span>
+          <h3 class="service-title">Data Analytics &amp; Intelligence</h3>
+          <p class="service-desc">Turning raw data into actionable insights to support decision-making and performance tracking.</p>
+        </div>
+        <div class="service-row">
+          <span class="service-num">06</span>
+          <h3 class="service-title">Cloud Solutions</h3>
+          <p class="service-desc">Secure, scalable, and cost-efficient cloud migration, management, and optimization.</p>
+        </div>
+        <div class="service-row">
+          <span class="service-num">07</span>
+          <h3 class="service-title">Artificial Intelligence &amp; Machine Learning</h3>
+          <p class="service-desc">Automated intelligence to optimize processes, enhance experience, and uncover new growth.</p>
+        </div>
+        <div class="service-row">
+          <span class="service-num">08</span>
+          <h3 class="service-title">Managed IT Services</h3>
+          <p class="service-desc">Proactive infrastructure management, support, and monitoring for uninterrupted business continuity.</p>
+        </div>
+        <div class="service-row">
+          <span class="service-num">09</span>
+          <h3 class="service-title">IT Project Management</h3>
+          <p class="service-desc">Experienced oversight so projects ship on time, on budget, and aligned with strategic goals.</p>
+        </div>
+        <div class="service-row">
+          <span class="service-num">10</span>
+          <h3 class="service-title">Training &amp; Support</h3>
+          <p class="service-desc">Upskilling teams through tailored training programs and on-demand technical support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── HOW WE WORK ───────────────── -->
+  <section id="process" class="process-section">
+    <div class="wrap process-inner">
+      <div class="process-header" data-reveal>
+        <span class="process-eyebrow">How we work</span>
+        <h2>A disciplined path from challenge to outcome.</h2>
+        <p>Every engagement follows a clear, governed method — so progress is visible, risk is managed, and results are measurable. It's how we earn the trust of enterprises and public institutions alike.</p>
+      </div>
+
+      <div class="process-grid" data-reveal>
+        <div class="process-step">
+          <span class="step-num">01</span>
+          <h3 class="step-title">Assess</h3>
+          <p class="step-body">Audit systems, clarify goals, and define a pragmatic roadmap.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">02</span>
+          <h3 class="step-title">Architect</h3>
+          <p class="step-body">Enterprise architecture and solution design built for scale and compliance.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">03</span>
+          <h3 class="step-title">Build</h3>
+          <p class="step-body">Custom software, integration, and cloud delivery — on time and on budget.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">04</span>
+          <h3 class="step-title">Secure</h3>
+          <p class="step-body">Security and governance embedded from day one, not bolted on later.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">05</span>
+          <h3 class="step-title">Operate</h3>
+          <p class="step-body">Managed services, monitoring, training, and support that keep you running.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── SECTORS ───────────────── -->
+  <section id="sectors">
+    <div class="wrap sectors-section">
+      <div class="sectors-header" data-reveal>
+        <span class="section-eyebrow">Who we serve</span>
+        <h2>Built for business — and for government.</h2>
+      </div>
+      <div class="sectors-grid" data-reveal>
+        <div class="sector-card">
+          <img
+            class="sector-img"
+            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&q=80&auto=format&fit=crop"
+            alt="Business office"
+            loading="lazy"
+          />
+          <div class="sector-body">
+            <div class="sector-meta">
+              <span class="sector-num">01</span>
+              <span class="sector-tag">Private sector</span>
+            </div>
+            <h3>Business</h3>
+            <p>Modernization, cloud, data, and AI that compound into durable growth.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <img
+            class="sector-img"
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80&auto=format&fit=crop"
+            alt="Government building"
+            loading="lazy"
+          />
+          <div class="sector-body">
+            <div class="sector-meta">
+              <span class="sector-num">02</span>
+              <span class="sector-tag">Public sector · soon</span>
+            </div>
+            <h3>Government</h3>
+            <p>Secure, compliant systems and digital services for public institutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── ABOUT ───────────────── -->
+  <section id="about" class="about-section">
+    <div class="wrap about-inner">
+      <div class="about-grid">
+        <div class="about-imgs" data-reveal>
+          <img
+            class="about-main"
+            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop"
+            alt="Team collaborating"
+            loading="lazy"
+          />
+          <img
+            class="about-sub"
+            src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&q=80&auto=format&fit=crop"
+            alt="Data center"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="about-text" data-reveal>
+          <span class="section-eyebrow">About us</span>
+          <h2>A trusted partner for impactful results.</h2>
+          <p>A Brooklyn-based technology firm delivering strategic solutions that drive transformation — helping businesses, and soon government institutions, tackle complex challenges with clarity and confidence.</p>
+          <p>We pair cutting-edge technology with tailored consulting and a deep understanding of each client's goals — guided by innovation, integrity, and meaningful impact.</p>
+        </div>
+      </div>
+
+      <div class="pillars-grid" data-reveal>
+        <div class="pillar">
+          <h3>Mission</h3>
+          <p>Deliver innovative, results-driven technology that empowers businesses and government institutions to achieve their goals.</p>
+        </div>
+        <div class="pillar">
+          <h3>Vision</h3>
+          <p>Be a trusted leader in digital transformation — helping organizations thrive through smart, scalable, secure solutions.</p>
+        </div>
+        <div class="pillar">
+          <h3>Goal</h3>
+          <p>Prioritize satisfaction and innovation, foster a collaborative culture, expand globally, and deliver excellence through data-driven strategy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── CONTACT ───────────────── -->
+  <section id="contact" class="contact-section">
+    <div class="wrap contact-inner">
+      <div class="contact-left" data-reveal>
+        <span class="contact-eyebrow">Partner with us</span>
+        <h2>Let's turn your technology into transformation.</h2>
+        <p>Tell us about your goals. We'll follow up within one business day to scope where we can help — strategy, build, security, or operations.</p>
+        <div class="contact-details">
+          <div class="contact-row">
+            <span class="contact-key">Phone</span>
+            <a href="tel:9293891667" class="contact-val">929.389.1667</a>
+          </div>
+          <div class="contact-row">
+            <span class="contact-key">Email</span>
+            <a href="mailto:info@elshakayaitbusinesssolutions.com" class="contact-val">info@elshakayaitbusinesssolutions.com</a>
+          </div>
+          <div class="contact-row">
+            <span class="contact-key">Hours</span>
+            <span class="contact-val-static">Mon–Fri · 9:00 AM – 5:30 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card" data-reveal>
+        <div class="form-thank" id="form-thank">
+          <div class="thank-icon">✓</div>
+          <h3>Thank you.</h3>
+          <p>We've received your details and will be in touch within one business day.</p>
+        </div>
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-grid">
+            <label class="form-field">
+              <span class="form-label">Name</span>
+              <input class="form-input" name="name" type="text" placeholder="Your full name" />
+            </label>
+            <label class="form-field">
+              <span class="form-label">Designation</span>
+              <input class="form-input" name="designation" type="text" placeholder="Job title" />
+            </label>
+            <label class="form-field">
+              <span class="form-label">Company</span>
+              <input class="form-input" name="company" type="text" placeholder="Company name" />
+            </label>
+            <label class="form-field">
+              <span class="form-label">Company website</span>
+              <input class="form-input" name="website" type="url" placeholder="https://" />
+            </label>
+            <label class="form-field">
+              <span class="form-label">Email</span>
+              <input class="form-input" name="email" type="email" placeholder="you@company.com" />
+            </label>
+            <label class="form-field">
+              <span class="form-label">Phone</span>
+              <input class="form-input" name="phone" type="tel" placeholder="+1 (000) 000-0000" />
+            </label>
+          </div>
+          <button class="form-submit" type="submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── FOOTER ───────────────── -->
+  <footer>
+    <div class="footer-top">
+      <a href="#top" class="footer-logo">
+        <span class="footer-logo-icon">
+          <img src="logo-mark.png" alt="Elshakaya" />
+        </span>
+        <span class="footer-logo-text">Elshakaya</span>
+      </a>
+      <nav class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#process">How we work</a>
+        <a href="#sectors">Sectors</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Elshakaya IT Business Solution Inc. All rights reserved.</span>
+      <span class="footer-copy">Brooklyn, New York</span>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Scroll-reveal ───
+    (function () {
+      const els = Array.from(document.querySelectorAll('[data-reveal]'));
+      els.forEach((el, i) => {
+        el.style.transitionDelay = (Math.min(i % 5, 4) * 55) + 'ms';
+      });
+
+      function check() {
+        const vh = window.innerHeight;
+        let any = false;
+        els.forEach(el => {
+          if (el.classList.contains('in')) return;
+          if (el.getBoundingClientRect().top < vh * 0.9) {
+            el.classList.add('in');
+          } else {
+            any = true;
+          }
+        });
+        return any;
+      }
+
+      check();
+      requestAnimationFrame(() => requestAnimationFrame(check));
+
+      const onScroll = () => { if (!check()) window.removeEventListener('scroll', onScroll, true); };
+      window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+
+      // Fallback: ensure everything is visible after 1.4s
+      setTimeout(() => els.forEach(el => el.classList.add('in')), 1400);
+    })();
+
+    // ─── Contact form ───
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('form-thank').classList.add('show');
+    }
+
+    // ─── Smooth nav active state on scroll ───
+    (function () {
+      const sections = ['top', 'services', 'process', 'sectors', 'about', 'contact'];
+      const links = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+
+      function onScroll() {
+        let current = '';
+        sections.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= 80) current = id;
+        });
+        links.forEach(link => {
+          const href = link.getAttribute('href').replace('#', '');
+          link.style.color = href === current ? 'var(--mark)' : '';
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+  </script>
+</body>
+</html>
