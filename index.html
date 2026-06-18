@@ -1282,9 +1282,25 @@
     })();
 
     // ─── Contact form ───
-    function handleSubmit(e) {
+    const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw5RaPv0VaRyynv89J-ptyFydTk_Zi1y9DPQ5wru12z71EHPRgE8ZaStjCyXbPOmd5o/exec';
+
+    async function handleSubmit(e) {
       e.preventDefault();
-      document.getElementById('contact-form').style.display = 'none';
+      const form = document.getElementById('contact-form');
+      const btn  = form.querySelector('.form-submit');
+      const data = Object.fromEntries(new FormData(form));
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        await fetch(`${FORM_ENDPOINT}?${new URLSearchParams(data)}`, {
+          method: 'GET',
+          mode: 'no-cors'
+        });
+      } catch (_) { /* show thank-you regardless */ }
+
+      form.style.display = 'none';
       document.getElementById('form-thank').classList.add('show');
     }
 
