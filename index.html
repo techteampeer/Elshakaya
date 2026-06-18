@@ -621,7 +621,27 @@
       transition: border-color .2s;
     }
     .form-input:focus { border-bottom-color: var(--navy); }
+    .form-input.error { border-bottom-color: #D93025; }
     .form-input::placeholder { color: #9AA0A8; }
+    .field-error {
+      font-size: 11px;
+      color: #D93025;
+      font-weight: 500;
+      min-height: 15px;
+      display: block;
+    }
+    .form-banner {
+      display: none;
+      background: #FDECEA;
+      color: #D93025;
+      border-radius: 8px;
+      padding: 11px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 18px;
+    }
+    .form-banner.show { display: block; }
+    .req { color: var(--accent); font-style: normal; }
     .form-submit {
       margin-top: 32px;
       width: 100%;
@@ -1193,31 +1213,38 @@
           <h3>Thank you.</h3>
           <p>We've received your details and will be in touch within one business day.</p>
         </div>
-        <form id="contact-form" onsubmit="handleSubmit(event)">
+        <form id="contact-form" onsubmit="handleSubmit(event)" novalidate>
+          <div class="form-banner" id="form-banner">Please fix the highlighted fields below.</div>
           <div class="form-grid">
             <label class="form-field">
-              <span class="form-label">Name</span>
+              <span class="form-label">Name <span class="req">*</span></span>
               <input class="form-input" name="name" type="text" placeholder="Your full name" />
+              <span class="field-error" id="err-name"></span>
             </label>
             <label class="form-field">
               <span class="form-label">Designation</span>
               <input class="form-input" name="designation" type="text" placeholder="Job title" />
+              <span class="field-error" id="err-designation"></span>
             </label>
             <label class="form-field">
               <span class="form-label">Company</span>
               <input class="form-input" name="company" type="text" placeholder="Company name" />
+              <span class="field-error" id="err-company"></span>
             </label>
             <label class="form-field">
               <span class="form-label">Company website</span>
-              <input class="form-input" name="website" type="url" placeholder="https://" />
+              <input class="form-input" name="website" type="text" placeholder="https://" />
+              <span class="field-error" id="err-website"></span>
             </label>
             <label class="form-field">
-              <span class="form-label">Email</span>
+              <span class="form-label">Email <span class="req">*</span></span>
               <input class="form-input" name="email" type="email" placeholder="you@company.com" />
+              <span class="field-error" id="err-email"></span>
             </label>
             <label class="form-field">
-              <span class="form-label">Phone</span>
+              <span class="form-label">Phone <span class="req">*</span></span>
               <input class="form-input" name="phone" type="tel" placeholder="+1 (000) 000-0000" />
+              <span class="field-error" id="err-phone"></span>
             </label>
           </div>
           <button class="form-submit" type="submit">Send message</button>
@@ -1284,12 +1311,68 @@
     // ─── Contact form ───
     const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxFTttmQq3Ul9D9krmAH4KbzJW-Cx3oWl_ap6nkXX3fl489W02LAGUewW82ijbBOEfy/exec';
 
+    const validators = {
+      name: v => {
+        if (!v.trim()) return 'Name is required.';
+        if (v.trim().length < 2) return 'Must be at least 2 characters.';
+        if (!/^[A-Za-z\s'\-\.]+$/.test(v.trim())) return 'Name should contain letters only.';
+        return '';
+      },
+      designation: () => '',
+      company: () => '',
+      website: v => {
+        if (!v.trim()) return '';
+        if (!/^https?:\/\/.+\..+/.test(v.trim())) return 'Enter a valid URL (https://...).';
+        return '';
+      },
+      email: v => {
+        if (!v.trim()) return 'Email is required.';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())) return 'Enter a valid email address.';
+        return '';
+      },
+      phone: v => {
+        if (!v.trim()) return 'Phone is required.';
+        if (v.replace(/\D/g, '').length < 7) return 'Enter a valid phone number.';
+        return '';
+      }
+    };
+
+    function validateField(input) {
+      const fn = validators[input.name];
+      if (!fn) return true;
+      const msg = fn(input.value);
+      const errEl = document.getElementById('err-' + input.name);
+      if (msg) {
+        input.classList.add('error');
+        if (errEl) errEl.textContent = msg;
+        return false;
+      }
+      input.classList.remove('error');
+      if (errEl) errEl.textContent = '';
+      return true;
+    }
+
+    document.querySelectorAll('#contact-form .form-input').forEach(input => {
+      input.addEventListener('blur', () => validateField(input));
+      input.addEventListener('input', () => {
+        if (input.classList.contains('error')) validateField(input);
+      });
+    });
+
     async function handleSubmit(e) {
       e.preventDefault();
-      const form = document.getElementById('contact-form');
+      const form   = document.getElementById('contact-form');
+      const banner = document.getElementById('form-banner');
+      const inputs = form.querySelectorAll('.form-input');
+
+      let valid = true;
+      inputs.forEach(input => { if (!validateField(input)) valid = false; });
+
+      if (!valid) { banner.classList.add('show'); return; }
+      banner.classList.remove('show');
+
       const btn  = form.querySelector('.form-submit');
       const data = Object.fromEntries(new FormData(form));
-
       btn.textContent = 'Sending…';
       btn.disabled = true;
 
@@ -1298,7 +1381,7 @@
           method: 'GET',
           mode: 'no-cors'
         });
-      } catch (_) { /* show thank-you regardless */ }
+      } catch (_) {}
 
       form.style.display = 'none';
       document.getElementById('form-thank').classList.add('show');
